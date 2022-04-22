@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            max-width: 1160px;
+            margin: 1em auto;
+            text-align: center;
+        }
+    </style>
+    <title>Portfel</title>
+</head>
+<body>
+    <h1><a href="/">Portfel</a></h1>
+    <img src="/static/{{ id }}.png" class="img-fluid" alt="Wykres" />
+    <form action="/">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td rowspan="2">Instrument</td>
+                    <td rowspan="2">Udział</td>
+                    <td rowspan="2">St. zwrotu</td>
+                    <td rowspan="2">St. zwrotu p.a.</td>
+                    <td rowspan="2">Odch. std 12M</td>
+                    <td colspan="3">Rozkład 12M stóp zwrotu</td>
+                    <td rowspan="2">Zmień</td>
+                </tr>
+                <tr>
+                    <td>min</td>
+                    <td>med</td>
+                    <td>max</td>
+                </tr>
+            </thead>
+            {% for i in funds %}
+            <tr>
+                <td style="text-align: left">{{ i['name'] }}</td>
+                <td style="text-align: right">{% if i['type'] == 'fund' %}{{ params[i['code']] }}%{% endif %}</td>
+                <td style="text-align: right">{{ i['roi'] }}</td>
+                <td style="text-align: right">{{ i['roi_pa'] }}</td>
+                <td style="text-align: right">{{ i['std_p'] }}</td>
+                <td style="text-align: right">{{ i['min'] }}</td>
+                <td style="text-align: right">{{ i['median'] }}</td>
+                <td style="text-align: right">{{ i['max'] }}</td>
+                <td>
+                {% if i['type'] == 'fund' %}
+                    <input type="number" id="{{ i['code'] }}" name="{{ i['code'] }}" min="0" max="100" step="5" value="{{ params[i['code']] }}">
+                {% elif (i['type'] == 'index' and i['code'] != 'Portfel') %}
+                    <input type="checkbox" id="{{ i['code'] }}" name="{{ i['code'] }}"{% if params[i['code']] == 'on' %} checked{% endif %}>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div style="text-align: right">
+            <input type="date" id="begin" name="begin" value="{{ params['begin'] }}">
+            <input type="date" id="end" name="end" value="{{ params['end'] }}">
+            <input type="submit">
+        </div>
+      </form>
+    <p style="font-size: small; text-align: left;">Nota prawna:<br/>
+        Niniejsza prezentacja przygotowana została wyłącznie w celach informacyjnych i edukacyjnych. Nie stanowi ona oferty w rozumieniu odpowiednich przepisów Kodeksu cywilnego, analizy inwestycyjnej, analizy finansowej, innej rekomendacji inwestycyjnej o charakterze ogólnym, ani nie jest świadczeniem usług doradztwa inwestycyjnego, nie może być także rozumiana jako zachęta do dokonywania inwestycji. Dane zamieszczone w prezentacji mogą być nieaktualne. Prezentowane wyniki  są wyłącznie informacjami historycznymi i nie stanowią gwarancji osiągnięcia podobnych wyników w przyszłości. Bank nie ponosi żadnej odpowiedzialności za szkody powstałe w wyniku wykorzystania niniejszej prezentacji niezgodnie z jej przeznaczeniem. 
+        Prezentacja stanowi utwór w rozumieniu przepisów ustawy z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych (t.j. z 2006 r., Dz.U. nr 90, poz. 631 z późn. zm.) i podlega odpowiedniej ochronie. Korzystanie i rozporządzanie utworem bez zgody twórcy jest zabronione.</p>
+</body>
+</html>

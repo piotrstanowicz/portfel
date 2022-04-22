@@ -1,0 +1,13 @@
+code,url,type,default,name
+NNKO,2721.n,fund,20,NN Parasol FIO Subfundusz Krótkoterminowych Obligacji A
+NNO,2722.n,fund,20,NN Parasol FIO Subfundusz Obligacji A
+NNSW,2734.n,fund,20,NN Parasol FIO Subfundusz Stabilnego Wzrostu A
+NNZ,2735.n,fund,20,NN Parasol FIO Subfundusz Zrównoważony A
+NNA,2718.n,fund,20,NN Parasol FIO Subfundusz Akcji A
+Portfel,,index,on,Portfel
+WIBOR6M,,index,,WIBOR6M
+WIBOR6M_rate,plopln6m,,,
+WIG20,wig20,index,,WIG20
+SPX,^spx,index,,SPX
+Gold,xauusd,index,,Gold
+Bitcoin,btc.v,index,,Bitcoin
